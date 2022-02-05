@@ -3,45 +3,19 @@ $(document).ready(function () {
     $("#chart").append(one_s_graph())
 })
 
-function testGraph() {
-    var arr = []
-    for (let i = 0; i < 10; i++) {
-        arr.push(Array(10).fill().map(() => Math.random()))
-    }
-    return Plotly.newPlot('chart', [{
-        z: arr,
-        type: 'surface'
-    }])
-}
-
 function one_s_graph() {
     points = one_s_points()
     var data = [{
-        x: points["x"],
-        y: points["y"],
-        z: points["z"],
-        mode: 'markers',
-        type: 'scatter3d',
+        x: points["x"], y: points["y"], z: points["z"],
+        mode: 'markers', type: 'scatter3d',
         marker: {
             color: 'rgb(23, 190, 207)',
             size: 2
         }
     }];
-    var layout = {
-        height: 1000,
-        width: 2000,
-        xaxis: {
-            visible: false
-        },
-        yaxis: {
-            visible: false
-        },
-        zaxis: {
-            zeroline: true
-        }
-    }
-    return Plotly.newPlot('chart', data, layout);
+    return Plotly.newPlot('chart', data, { height: 1000, width: 2000 });
 }
+
 function one_s_points() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
@@ -72,23 +46,12 @@ function one_s_radius() {
         // p = 2Zr / n, n being principal quantum number i.e. number of protons
         // and Z being effective nucelar charge i.e. number of protons in the atom
         var p = 2.0 * r1
-        // radial wave function
-        var r = 2.0 * Math.pow(1.0, (3.0 / 2.0)) * Math.pow(Math.E, (-1.0 * p))
-        // angular wave function
-        var y = Math.sqrt((1.0 / (4.0 * Math.PI)))
-        // wave function
-        var w = r * y
-        // electron probablity density function
-        var E = Math.pow(w, 2.0)
-
-        // is the second random number less than y?
-        if (r2 < E) { // if so, return random number 1 as radius of point
-            foundone = true
-            return r1
-        }
-        // if not, keep trying until successful
+        var r = 2.0 * Math.pow(1.0, (3.0 / 2.0)) * Math.pow(Math.E, (-1.0 * p)) // radial wave function
+        var y = Math.sqrt((1.0 / (4.0 * Math.PI))) // angular wave function
+        var w = r * y // wave function
+        var E = Math.pow(w, 2.0) // electron probablity density function
+        if (r2 < E) return r1 // if 
     }
-    return 0.0
 }
 
 function randomRange(min, max) {
