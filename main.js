@@ -27,9 +27,21 @@ function one_s_graph() {
             size: 2
         }
     }];
-    return Plotly.newPlot('chart', data, { height: 1000, width: 2000 });
+    var layout = {
+        height: 1000,
+        width: 2000,
+        xaxis: {
+            visible: false
+        },
+        yaxis: {
+            visible: false
+        },
+        zaxis: {
+            zeroline: true
+        }
+    }
+    return Plotly.newPlot('chart', data, layout);
 }
-
 function one_s_points() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
@@ -51,20 +63,30 @@ function one_s_points() {
     return { "x": x_arr, "y": y_arr, "z": z_arr }
 }
 
+// samples the Electron PDF and returns the x value
 function one_s_radius() {
     var foundone = false
     while (!foundone) {
+        // randomly picks 2 numbers within the domain of the PDF (probability density function)
         var r1 = randomRange(0.0, 4.38), r2 = randomRange(0.0, 4.38)
+        // p = 2Zr / n, n being principal quantum number i.e. number of protons
+        // and Z being effective nucelar charge i.e. number of protons in the atom
         var p = 2.0 * r1
+        // radial wave function
         var r = 2.0 * Math.pow(1.0, (3.0 / 2.0)) * Math.pow(Math.E, (-1.0 * p))
+        // angular wave function
         var y = Math.sqrt((1.0 / (4.0 * Math.PI)))
+        // wave function
         var w = r * y
+        // electron probablity density function
         var E = Math.pow(w, 2.0)
 
-        if (r2 < E) {
+        // is the second random number less than y?
+        if (r2 < E) { // if so, return random number 1 as radius of point
             foundone = true
             return r1
         }
+        // if not, keep trying until successful
     }
     return 0.0
 }
