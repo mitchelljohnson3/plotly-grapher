@@ -1,4 +1,4 @@
-const GRAPH_RESOLUTION = 5000;
+const GRAPH_RESOLUTION = 10000;
 $(document).ready(function () {
     $("#chart").append(one_s_graph())
 })
@@ -42,14 +42,18 @@ function one_s_radius() {
     var foundone = false
     while (!foundone) {
         // randomly picks 2 numbers within the domain of the PDF (probability density function)
-        var r1 = randomRange(0.0, 4.38), r2 = randomRange(0.0, 4.38)
+        var r1 = randomRange(0.0, 7.69), r2 = randomRange(0.0, 7.69)
         // p = 2Zr / n, n being principal quantum number i.e. number of protons
         // and Z being effective nucelar charge i.e. number of protons in the atom
         var p = 2.0 * r1
         var r = 2.0 * Math.pow(1.0, (3.0 / 2.0)) * Math.pow(Math.E, (-1.0 * p)) // radial wave function
         var y = Math.sqrt((1.0 / (4.0 * Math.PI))) // angular wave function
         var w = r * y // wave function
+        //
+        w = Math.pow(r1, 2.0) * Math.pow(r, 2.0)
         var E = Math.pow(w, 2.0) // electron probablity density function
+        if (r2 < w) return r1 // if 
+        //
         if (r2 < E) return r1 // if 
     }
 }
