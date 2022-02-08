@@ -5,13 +5,13 @@ function randomRange(min, max) {
 function one_s_radius() {
     // uses rejection sampling to sample our custom distribution
     const PDF_RANGE = 0.5413
-    const PDF_DOMAIN = 7.69
+    const PDF_DOMAIN = 5
     while (true) {
         var x = randomRange(0.0, PDF_DOMAIN)
         var u = randomRange(0.0, PDF_DOMAIN)
-        var r = 2.0 * Math.pow(1.0, (3.0 / 2.0)) * Math.pow(Math.E, x)
+        var r = 2.0 * Math.pow(1.0, (3.0 / 2.0)) * Math.pow(Math.E, -x)
         PDF = Math.pow(x, 2.0) * Math.pow(r, 2.0)
-        if (u <= (PDF / (PDF_RANGE * x))) return Math.round(x * 10) / 10
+        if (u <= PDF) return Math.round(x * 10) / 10
     }
 }
 
