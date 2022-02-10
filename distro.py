@@ -46,7 +46,7 @@ def R32():
 res = {}
 n = 100000
 for i in range(n):
-    val = R31()
+    val = R32()
     if val in res: res[val] += 1
     else: res[val] = 1
 
