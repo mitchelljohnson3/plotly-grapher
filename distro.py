@@ -44,7 +44,7 @@ def R32():
         p32 = math.pow(x,2) * math.pow(r32,2)
         if u < p32: return round(x * 10) / 10
 res = {}
-n = 10000
+n = 100000
 for i in range(n):
     val = R32()
     if val in res: res[val] += 1
