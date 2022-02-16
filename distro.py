@@ -1,4 +1,4 @@
-iimport math
+import math
 import numpy as np
 
 def R10():
