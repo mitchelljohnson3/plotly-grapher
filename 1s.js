@@ -6,7 +6,7 @@ $(document).ready(function () {
 function GRAPH10() {
     var points = P10()
     var data = [{
-        x: points["x"], y: points["y"], z: points["z"],
+        x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
         marker: {
             color: 'rgb(23, 190, 207)',
@@ -19,29 +19,12 @@ function GRAPH10() {
 function P10() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        // generate random 3d point
-        var point = randomPoint()
-        // sample one s distribution
+        var point = RANDOM_POINT()
         var radius = R10()
-        // apply radius to each point
-        point["x"] *= radius, point["y"] *= radius, point["z"] *= radius
-        // add coordinate to lists
-        x_arr.push(point["x"]), y_arr.push(point["y"]), z_arr.push(point["z"])
+        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
     }
-    return { "x": x_arr, "y": y_arr, "z": z_arr }
-}
-
-// returns random 3d point in sphere (cartesian coordinates)
-function randomPoint() {
-    // calculate random latitude and longitude
-    var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
-    var lat = (Math.acos((2 * u1) - 1) - (Math.PI / 2)) // calculate random latitude
-    var lon = (2 * Math.PI * u2) // calculate random longitude
-    // convert lat, lon into cartesian coordinates
-    var x = Math.cos(lat) * Math.cos(lon)
-    var y = Math.cos(lat) * Math.sin(lon)
-    var z = Math.sin(lat)
-    return { "x": x, "y": y, "z": z }
+    return [x_arr, y_arr, z_arr]
 }
 
 // samples the Electron PDF and returns the x value
@@ -54,6 +37,35 @@ function R10() {
         if (u < p10) return Math.round(x * 10) / 10
     }
 }
+
+// returns random float value within the range of min - max
 function randomRange(min, max) {
     return Math.random() * (max - min) + min;
+}
+
+// returns random 3d point in sphere (cartesian coordinates)
+function RANDOM_POINT() {
+    // calculate random latitude and longitude
+    var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
+    var lat = (Math.acos((2 * u1) - 1) - (Math.PI / 2)) // calculate random latitude
+    var lon = (2 * Math.PI * u2) // calculate random longitude
+    // convert lat, lon into cartesian coordinates
+    var x = Math.cos(lat) * Math.cos(lon)
+    var y = Math.cos(lat) * Math.sin(lon)
+    var z = Math.sin(lat)
+    return [x, y, z]
+}
+
+function POLAR_TO_CARTESIAN(r, theta, phi) {
+    var x = r * Math.sin(theta) * Math.cos(phi)
+    var y = r * Math.sin(theta) * Math.sin(phi)
+    var z = r * Math.cos(theta)
+    return [x, y, z]
+}
+
+function CARTESIAN_TO_POLAR(x, y, z) {
+    var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
+    var theta = 1 / Math.cos(z / r)
+    var phi = 0
+    return [r, theta, phi]
 }
