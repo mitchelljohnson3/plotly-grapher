@@ -15,7 +15,7 @@ function R10() {
 const N = 10000
 var res = {}
 for (let i = 0; i < N; i++) {
-    var tmp = R00()
+    var tmp = R10()
     if (tmp in res) res[tmp]++
     else res[tmp] = 1
 }

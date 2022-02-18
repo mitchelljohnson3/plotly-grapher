@@ -1,10 +1,10 @@
 const GRAPH_RESOLUTION = 10000;
 $(document).ready(function () {
-    $("#chart").append(one_s_graph())
+    $("#chart").append(GRAPH10())
 })
 
-function one_s_graph() {
-    points = one_s_points()
+function GRAPH10() {
+    var points = P10()
     var data = [{
         x: points["x"], y: points["y"], z: points["z"],
         mode: 'markers', type: 'scatter3d',
@@ -16,48 +16,44 @@ function one_s_graph() {
     return Plotly.newPlot('chart', data, { height: 1000, width: 2000 });
 }
 
-function one_s_points() {
+function P10() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        // calculate random latitude and longitude
-        var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
-        var lat = (Math.acos((2 * u1) - 1) - (Math.PI / 2)) // calculate random latitude
-        var lon = (2 * Math.PI * u2) // calculate random longitude
-        // convert lat, lon into cartesian coordinates
-        var x = Math.cos(lat) * Math.cos(lon)
-        var y = Math.cos(lat) * Math.sin(lon)
-        var z = Math.sin(lat)
-        // randomly assign coordinate a radius based on the PDF of 1s electron
-        var radius = one_s_radius()
+        // generate random 3d point
+        var point = randomPoint()
+        // sample one s distribution
+        var radius = R10()
         // apply radius to each point
-        x *= radius, y *= radius, z *= radius
+        point["x"] *= radius, point["y"] *= radius, point["z"] *= radius
         // add coordinate to lists
-        x_arr.push(x), y_arr.push(y), z_arr.push(z)
+        x_arr.push(point["x"]), y_arr.push(point["y"]), z_arr.push(point["z"])
     }
     return { "x": x_arr, "y": y_arr, "z": z_arr }
 }
 
-// samples the Electron PDF and returns the x value
-function one_s_radius() {
-    var foundone = false
-    while (!foundone) {
-        // randomly picks 2 numbers within the domain of the PDF (probability density function)
-        var r1 = randomRange(0.0, 7.69), r2 = randomRange(0.0, 7.69)
-        // p = 2Zr / n, n being principal quantum number i.e. number of protons
-        // and Z being effective nucelar charge i.e. number of protons in the atom
-        var p = 2.0 * r1
-        var r = 2.0 * Math.pow(1.0, (3.0 / 2.0)) * Math.pow(Math.E, (-1.0 * p)) // radial wave function
-        var y = Math.sqrt((1.0 / (4.0 * Math.PI))) // angular wave function
-        var w = r * y // wave function
-        //
-        w = Math.pow(r1, 2.0) * Math.pow(r, 2.0)
-        var E = Math.pow(w, 2.0) // electron probablity density function
-        if (r2 < w) return r1 // if 
-        //
-        if (r2 < E) return r1 // if 
-    }
+// returns random 3d point in sphere (cartesian coordinates)
+function randomPoint() {
+    // calculate random latitude and longitude
+    var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
+    var lat = (Math.acos((2 * u1) - 1) - (Math.PI / 2)) // calculate random latitude
+    var lon = (2 * Math.PI * u2) // calculate random longitude
+    // convert lat, lon into cartesian coordinates
+    var x = Math.cos(lat) * Math.cos(lon)
+    var y = Math.cos(lat) * Math.sin(lon)
+    var z = Math.sin(lat)
+    return { "x": x, "y": y, "z": z }
 }
 
+// samples the Electron PDF and returns the x value
+function R10() {
+    var DOMAIN = 7.69, RANGE = 0.54
+    while (true) {
+        var x = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var r10 = 2 * Math.pow(1, (3 / 2)) * Math.pow(Math.E, -x)
+        var p10 = Math.pow(x, 2) * Math.pow(r10, 2)
+        if (u < p10) return Math.round(x * 10) / 10
+    }
+}
 function randomRange(min, max) {
     return Math.random() * (max - min) + min;
 }
