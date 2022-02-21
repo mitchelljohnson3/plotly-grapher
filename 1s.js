@@ -67,8 +67,8 @@ function POLAR_TO_CARTESIAN(r, theta, phi) {
 function CARTESIAN_TO_POLAR(x, y, z) {
     var x = point[0], y = point[1], z = point[2]
     var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
-    var theta = 1.0 / Math.cos(z / r)
-    var phi = 1.0 / Math.tan(y / x)
+    var theta = 1.0 / Math.tan(y / x)
+    var phi = 1.0 / Math.cos(y / r)
     return [r, theta, phi]
 }
 
