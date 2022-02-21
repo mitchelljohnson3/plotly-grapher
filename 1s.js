@@ -67,9 +67,13 @@ function POLAR_TO_CARTESIAN(point) {
 function CARTESIAN_TO_POLAR(point) {
     var X = point[0], Y = point[1], Z = point[2]
     var radius = Math.sqrt(X * X + Y * Y + Z * Z)
-    var theta = Math.atan2(Y, X)
-    var phi = Math.acos(Z / radius)
+    var theta = radians_to_degrees(Math.atan2(Y, X))
+    var phi = radians_to_degrees(Math.acos(Z / radius))
     return [radius, theta, phi]
+}
+
+function radians_to_degrees(radians) {
+    return radians * (180 / Math.PI);
 }
 
 var point = RANDOM_POINT()
