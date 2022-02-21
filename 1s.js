@@ -47,8 +47,8 @@ function randomRange(min, max) {
 function RANDOM_POINT() {
     // calculate random latitude and longitude
     var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
-    var lat = (Math.acos((2 * u1) - 1) - (Math.PI / 2)) // calculate random latitude
-    var lon = (2 * Math.PI * u2) // calculate random longitude
+    var lat = (Math.acos((2.0 * u1) - 1.0) - (Math.PI / 2.0)) // calculate random latitude
+    var lon = (2.0 * Math.PI * u2) // calculate random longitude
     // convert lat, lon into cartesian coordinates
     var x = Math.cos(lat) * Math.cos(lon)
     var y = Math.cos(lat) * Math.sin(lon)
@@ -65,8 +65,8 @@ function POLAR_TO_CARTESIAN(r, theta, phi) {
 
 function CARTESIAN_TO_POLAR(x, y, z) {
     var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
-    var theta = 1 / Math.cos(z / r)
-    var phi = 1 / Math.tan(y / r)
+    var theta = 1.0 / Math.cos(z / r)
+    var phi = 1.0 / Math.tan(y / r)
     return [r, theta, phi]
 }
 
