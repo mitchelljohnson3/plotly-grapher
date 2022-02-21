@@ -56,7 +56,7 @@ function RANDOM_POINT() {
     return [x, y, z]
 }
 
-function POLAR_TO_CARTESIAN(r, theta, phi) {
+function POLAR_TO_CARTESIAN(point) {
     var r = point[0], theta = point[1], phi = point[2]
     var x = r * Math.sin(theta) * Math.cos(phi)
     var y = r * Math.sin(theta) * Math.sin(phi)
@@ -64,7 +64,7 @@ function POLAR_TO_CARTESIAN(r, theta, phi) {
     return [x, y, z]
 }
 
-function CARTESIAN_TO_POLAR(x, y, z) {
+function CARTESIAN_TO_POLAR(point) {
     var x = point[0], y = point[1], z = point[2]
     var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
     var theta = Math.atan2(y / x)
