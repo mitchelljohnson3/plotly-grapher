@@ -9,7 +9,7 @@ $(document).ready(function () {
 // phi range [0 - 360] degrees OR [0 - 2PI] radians
 
 function graph() {
-    var points = ORB_2Pz()
+    var points = ORB_1S()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
@@ -25,9 +25,13 @@ function graph() {
 function ORB_1S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = randomCartesianPoint()
+        //var point = randomCartesianPoint()
+        //var radius = R10()
+        //point[0] *= radius, point[1] *= radius, point[2] *= radius
+        var point = randomPolarPoint()
         var radius = R10()
-        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        point[0] = radius
+        point = PolarToCartesian(point)
         x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
     return [x, y, z]
@@ -57,13 +61,12 @@ function ORB_2Pz() {
     return [x, y, z]
 }
 
-// -------------------------------------------------
 // samples the R10 (n = 1 l = 0 radial electron PDF)
 // 1s orbital
 function R10() {
-    var DOMAIN = 7.69, RANGE = 0.54
+    var domain = 7.69, range = 0.54
     while (true) {
-        var x = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var x = randomRange(0.0, domain), u = randomRange(0.0, range)
         var r10 = 2 * Math.pow(1, (3 / 2)) * Math.pow(Math.E, -x)
         var p10 = Math.pow(x, 2) * Math.pow(r10, 2)
         if (u < p10) return round(x, 1)
@@ -72,9 +75,9 @@ function R10() {
 // samples the R20 (n = 2 l = 0 radial electron PDF)
 // 2s orbital
 function R20() {
-    var DOMAIN = 19.5, RANGE = 0.191
+    var domain = 19.5, range = 0.191
     while (true) {
-        var x = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var x = randomRange(0.0, domain), u = randomRange(0.0, range)
         var r20 = Math.pow((1 / 2), (3 / 2)) * (2 - x) * Math.pow(Math.E, (-x / 2))
         var p20 = Math.pow(x, 2) * Math.pow(r20, 2)
         if (u < p20) return round(x, 1)
@@ -82,15 +85,14 @@ function R20() {
 }
 // samples the R21 (n = 2 l = 1 radial electron PDF)
 function R21() {
-    var DOMAIN = 18.37, RANGE = 0.1954
+    var domain = 18.37, range = 0.1954
     while (true) {
-        var x = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var x = randomRange(0.0, domain), u = randomRange(0.0, range)
         var r21 = (1 / Math.sqrt(3)) * Math.pow((1 / 2), (3 / 2)) * x * Math.pow(Math.E, (-x / 2))
         var p21 = Math.pow(x, 2) * Math.pow(r21, 2)
         if (u < p21) return round(x, 1)
     }
 }
-// -------------------------------------------------
 
 // samples the Y10 (n = 2 l = 1 m = 0)
 function Y10() {
@@ -99,9 +101,9 @@ function Y10() {
 }
 // samples the Y11 (n = 2 l = 1 m = 1)
 function Y11() {
-    var DOMAIN = Math.PI, RANGE = 0.866
+    var domain = Math.PI, range = 0.866
     while (true) {
-        var theta = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var theta = randomRange(0.0, domain), u = randomRange(0.0, range)
         var y11 = Math.sqrt((3 / 4)) * Math.sin(theta)
         if (u < y11) {
             var degrees = RadToDeg(theta)
