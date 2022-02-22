@@ -72,7 +72,7 @@ function CARTESIAN_TO_POLAR(point) {
     return [radius, theta, phi]
 }
 
-var point = RANDOM_POINT()
+var point = [1, 1, 1]
 console.log("cartesian", point)
 point = CARTESIAN_TO_POLAR(point)
 console.log("polar", point)
