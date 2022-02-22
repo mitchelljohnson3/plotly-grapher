@@ -57,6 +57,7 @@ function RANDOM_POINT() {
     return [x, y, z]
 }
 
+// functioning perfectly
 function POLAR_TO_CARTESIAN(point) {
     var radius = point[0]
     var theta = point[1] / (180 / Math.PI)
