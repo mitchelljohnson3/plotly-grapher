@@ -1,6 +1,6 @@
 const GRAPH_RESOLUTION = 10000;
 $(document).ready(function () {
-    $("#chart").append(GRAPH10())
+    $("#chart").append(graph())
 })
 
 // theta -> angle from positive z axis towards positive x axis
@@ -8,8 +8,8 @@ $(document).ready(function () {
 // phi -> angle from positive x axis towards positive y axis
 // phi range [0 - 360] degrees OR [0 - 2PI] radians
 
-function GRAPH10() {
-    var points = ORB_1s()
+function graph() {
+    var points = ORB_2Pz()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
@@ -22,7 +22,7 @@ function GRAPH10() {
 }
 
 // returns the 1s graph points
-function ORB_1s() {
+function ORB_1S() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = RANDOM_POINT()
@@ -33,7 +33,7 @@ function ORB_1s() {
     return [x_arr, y_arr, z_arr]
 }
 // returns the 2s (n=2 l=0 m=0) graph points
-function ORB_2s() {
+function ORB_2S() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = RANDOM_POINT()
@@ -43,13 +43,14 @@ function ORB_2s() {
     }
     return [x_arr, y_arr, z_arr]
 }
-// returns the 2pz (n=2 l=1 m=0) graph points
-function ORB_2pz() {
+// returns the 2pz (n=2 l=1 m=-+1) graph points
+function ORB_2Pz() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = RANDOM_POINT()
+        var point = CARTESIAN_TO_POLAR(RANDOM_POINT())
         var radius = R10()
-        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        var newTheta =
+            point[0] *= radius, point[1] *= radius, point[2] *= radius
         x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
     }
     return [x_arr, y_arr, z_arr]
