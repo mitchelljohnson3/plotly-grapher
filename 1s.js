@@ -25,7 +25,7 @@ function graph() {
 function ORB_1S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = randomPoint()
+        var point = randomCartesianPoint()
         var radius = R10()
         point[0] *= radius, point[1] *= radius, point[2] *= radius
         x.push(point[0]), y.push(point[1]), z.push(point[2])
@@ -36,7 +36,7 @@ function ORB_1S() {
 function ORB_2S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = randomPoint()
+        var point = randomCartesianPoint()
         var radius = R20()
         point[0] *= radius, point[1] *= radius, point[2] *= radius
         x.push(point[0]), y.push(point[1]), z.push(point[2])
@@ -47,7 +47,7 @@ function ORB_2S() {
 function ORB_2Pz() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = randomPoint()
+        var point = randomCartesianPoint()
         point = CartesianToPolar(point)
         var radius = R21(), theta = Y11()
         point[0] = radius, point[1] = theta
@@ -109,7 +109,8 @@ function Y11() {
         }
     }
 }
-
+// BELOW ARE HELPER FUNCTIONS
+// -------------------------------------------------
 // returns random float value within the range of min - max
 function randomRange(min, max) {
     return Math.random() * (max - min) + min;
@@ -129,7 +130,7 @@ function RadToDeg(deg) {
 }
 // returns random 3d point in sphere (cartesian coordinates)
 // functions perfectly, picks points all with a radius of 1 from 0,0
-function randomPoint() {
+function randomCartesianPoint() {
     // calculate random latitude and longitude
     var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
     var lat = (Math.acos((2.0 * u1) - 1.0) - (Math.PI / 2.0)) // calculate random latitude
@@ -139,6 +140,12 @@ function randomPoint() {
     var y = Math.cos(lat) * Math.sin(lon)
     var z = Math.sin(lat)
     return [x, y, z]
+}
+// returns a random polar point with a radius of 1
+function randomPolarPoint() {
+    var theta = randomRange(0.0, 180.0)
+    var phi = randomRange(0.0, 360.0)
+    return [1, theta, phi]
 }
 // functioning perfectly
 function PolarToCartesian(point) {
