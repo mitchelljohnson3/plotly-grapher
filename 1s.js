@@ -47,12 +47,19 @@ function ORB_2S() {
 function ORB_2Pz() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = CARTESIAN_TO_POLAR(RANDOM_POINT())
-        var radius = R10()
-        var newTheta = RadToDeg(Y11())
-        point[1] = newTheta
+        var point = RANDOM_POINT()
+        console.log("cartesian", point)
+        point = CARTESIAN_TO_POLAR(point)
+        console.log("polar", point)
+        var radius = R21()
+        console.log("radius", radius)
+        var theta = Y11()
+        console.log("new theta", newTheta)
+        point[0] = radius
+        point[1] = theta
+        console.log("new polar", point)
         point = POLAR_TO_CARTESIAN(point)
-        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        console.log("new cartestian", point)
         x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
     }
     return [x_arr, y_arr, z_arr]
@@ -104,7 +111,10 @@ function Y11() {
     while (true) {
         var theta = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
         var y11 = Math.sqrt((3 / 4)) * Math.sin(theta)
-        if (u < y11) return round(theta, 1)
+        if (u < y11) {
+            var degrees = RadToDeg(theta)
+            return round(degrees, 1)
+        }
     }
 }
 
