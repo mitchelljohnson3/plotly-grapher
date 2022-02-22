@@ -3,6 +3,11 @@ $(document).ready(function () {
     $("#chart").append(GRAPH10())
 })
 
+// theta -> angle from positive z axis towards positive x axis
+// theta range [0 - 180] degrees OR [0 - PI] radians
+// phi -> angle from positive x axis towards positive y axis
+// phi range [0 - 360] degrees OR [0 - 2PI] radians
+
 function GRAPH10() {
     var points = P10()
     var data = [{
