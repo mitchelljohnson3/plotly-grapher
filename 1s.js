@@ -64,6 +64,7 @@ function POLAR_TO_CARTESIAN(point) {
     return [X, Y, Z]
 }
 
+// functioning perfectly
 function CARTESIAN_TO_POLAR(point) {
     var X = point[0], Y = point[1], Z = point[2]
     var radius = Math.sqrt(X * X + Y * Y + Z * Z)
