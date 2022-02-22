@@ -44,6 +44,7 @@ function randomRange(min, max) {
 }
 
 // returns random 3d point in sphere (cartesian coordinates)
+// functions perfectly, picks points all with a radius of 1 from 0,0
 function RANDOM_POINT() {
     // calculate random latitude and longitude
     var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
@@ -58,9 +59,9 @@ function RANDOM_POINT() {
 
 function POLAR_TO_CARTESIAN(point) {
     var radius = point[0], theta = point[1], phi = point[2]
-    var X = radius * Math.cos(theta) * Math.cos(phi)
-    var Y = radius * Math.sin(theta) * Math.cos(phi)
-    var Z = radius * Math.sin(phi)
+    var X = radius * Math.sin(phi) * Math.cos(theta)
+    var Y = radius * Math.sin(phi) * Math.sin(theta)
+    var Z = radius * Math.cos(phi)
     return [X, Y, Z]
 }
 
