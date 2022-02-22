@@ -49,8 +49,10 @@ function ORB_2Pz() {
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = CARTESIAN_TO_POLAR(RANDOM_POINT())
         var radius = R10()
-        var newTheta =
-            point[0] *= radius, point[1] *= radius, point[2] *= radius
+        var newTheta = RadToDeg(Y11())
+        point[1] = newTheta
+        point = POLAR_TO_CARTESIAN(point)
+        point[0] *= radius, point[1] *= radius, point[2] *= radius
         x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
     }
     return [x_arr, y_arr, z_arr]
@@ -99,7 +101,11 @@ function Y10() {
 // samples the Y11 (n = 2 l = 1 m = 1)
 function Y11() {
     var DOMAIN = Math.PI, RANGE = 0.866
-    return 0
+    while (true) {
+        var theta = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var y11 = Math.sqrt((3 / 4)) * Math.sin(theta)
+        if (u < y11) return round(theta, 1)
+    }
 }
 
 // returns random float value within the range of min - max
