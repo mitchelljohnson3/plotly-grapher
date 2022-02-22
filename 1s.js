@@ -87,10 +87,3 @@ function CARTESIAN_TO_POLAR(point) {
     var phi = RadToDeg(Math.acos(Z / radius))
     return [round(radius, 2), round(theta, 2), round(phi, 2)]
 }
-
-var point = [1, 1, 1]
-console.log("cartesian", point)
-point = CARTESIAN_TO_POLAR(point)
-console.log("polar", point)
-point = POLAR_TO_CARTESIAN(point)
-console.log("cartesian", point)
