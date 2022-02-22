@@ -9,7 +9,7 @@ $(document).ready(function () {
 // phi range [0 - 360] degrees OR [0 - 2PI] radians
 
 function GRAPH10() {
-    var points = P10()
+    var points = ORB_1s()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
@@ -21,8 +21,30 @@ function GRAPH10() {
     return Plotly.newPlot('chart', data, { height: 1000, width: 2000 });
 }
 
-// returns array holding all x,y,z values of all points in graph
-function P10() {
+// returns the 1s graph points
+function ORB_1s() {
+    var x_arr = [], y_arr = [], z_arr = []
+    for (let i = 0; i < GRAPH_RESOLUTION; i++) {
+        var point = RANDOM_POINT()
+        var radius = R10()
+        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
+    }
+    return [x_arr, y_arr, z_arr]
+}
+// returns the 2s (n=2 l=0 m=0) graph points
+function ORB_2s() {
+    var x_arr = [], y_arr = [], z_arr = []
+    for (let i = 0; i < GRAPH_RESOLUTION; i++) {
+        var point = RANDOM_POINT()
+        var radius = R20()
+        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
+    }
+    return [x_arr, y_arr, z_arr]
+}
+// returns the 2pz (n=2 l=1 m=0) graph points
+function ORB_2pz() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = RANDOM_POINT()
@@ -35,6 +57,7 @@ function P10() {
 
 // -------------------------------------------------
 // samples the R10 (n = 1 l = 0 radial electron PDF)
+// 1s orbital
 function R10() {
     var DOMAIN = 7.69, RANGE = 0.54
     while (true) {
@@ -45,6 +68,7 @@ function R10() {
     }
 }
 // samples the R20 (n = 2 l = 0 radial electron PDF)
+// 2s orbital
 function R20() {
     var DOMAIN = 19.5, RANGE = 0.191
     while (true) {
@@ -66,7 +90,16 @@ function R21() {
 }
 // -------------------------------------------------
 
-// samples the Y00
+// samples the Y10 (n = 2 l = 1 m = 0)
+function Y10() {
+    var DOMAIN = Math.PI, RANGE = 1.225
+    return 0
+}
+// samples the Y11 (n = 2 l = 1 m = 1)
+function Y11() {
+    var DOMAIN = Math.PI, RANGE = 0.866
+    return 0
+}
 
 // returns random float value within the range of min - max
 function randomRange(min, max) {
