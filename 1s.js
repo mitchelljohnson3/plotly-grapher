@@ -21,6 +21,7 @@ function GRAPH10() {
     return Plotly.newPlot('chart', data, { height: 1000, width: 2000 });
 }
 
+// returns array holding all x,y,z values of all points in graph
 function P10() {
     var x_arr = [], y_arr = [], z_arr = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
@@ -32,16 +33,40 @@ function P10() {
     return [x_arr, y_arr, z_arr]
 }
 
-// samples the Electron PDF and returns the x value
+// -------------------------------------------------
+// samples the R10 (n = 1 l = 0 radial electron PDF)
 function R10() {
     var DOMAIN = 7.69, RANGE = 0.54
     while (true) {
         var x = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
         var r10 = 2 * Math.pow(1, (3 / 2)) * Math.pow(Math.E, -x)
         var p10 = Math.pow(x, 2) * Math.pow(r10, 2)
-        if (u < p10) return Math.round(x * 10) / 10
+        if (u < p10) return round(x, 1)
     }
 }
+// samples the R20 (n = 2 l = 0 radial electron PDF)
+function R20() {
+    var DOMAIN = 19.5, RANGE = 0.191
+    while (true) {
+        var x = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var r20 = Math.pow((1 / 2), (3 / 2)) * (2 - x) * Math.pow(Math.E, (-x / 2))
+        var p20 = Math.pow(x, 2) * Math.pow(r20, 2)
+        if (u < p20) return round(x, 1)
+    }
+}
+// samples the R21 (n = 2 l = 1 radial electron PDF)
+function R21() {
+    var DOMAIN = 18.37, RANGE = 0.1954
+    while (true) {
+        var x = randomRange(0.0, DOMAIN), u = randomRange(0.0, RANGE)
+        var r21 = (1 / Math.sqrt(3)) * Math.pow((1 / 2), (3 / 2)) * x * Math.pow(Math.E, (-x / 2))
+        var p21 = Math.pow(x, 2) * Math.pow(r21, 2)
+        if (u < p21) return round(x, 1)
+    }
+}
+// -------------------------------------------------
+
+// samples the Y00
 
 // returns random float value within the range of min - max
 function randomRange(min, max) {
