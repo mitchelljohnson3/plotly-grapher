@@ -23,46 +23,38 @@ function graph() {
 
 // returns the 1s graph points
 function ORB_1S() {
-    var x_arr = [], y_arr = [], z_arr = []
+    var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = RANDOM_POINT()
         var radius = R10()
         point[0] *= radius, point[1] *= radius, point[2] *= radius
-        x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
+        x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
-    return [x_arr, y_arr, z_arr]
+    return [x, y, z]
 }
 // returns the 2s (n=2 l=0 m=0) graph points
 function ORB_2S() {
-    var x_arr = [], y_arr = [], z_arr = []
+    var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = RANDOM_POINT()
         var radius = R20()
         point[0] *= radius, point[1] *= radius, point[2] *= radius
-        x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
+        x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
-    return [x_arr, y_arr, z_arr]
+    return [x, y, z]
 }
 // returns the 2pz (n=2 l=1 m=-+1) graph points
 function ORB_2Pz() {
-    var x_arr = [], y_arr = [], z_arr = []
+    var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = RANDOM_POINT()
-        console.log("cartesian", point)
         point = CARTESIAN_TO_POLAR(point)
-        console.log("polar", point)
-        var radius = R21()
-        console.log("radius", radius)
-        var theta = Y11()
-        console.log("new theta", newTheta)
-        point[0] = radius
-        point[1] = theta
-        console.log("new polar", point)
+        var radius = R21(), theta = Y11()
+        point[0] = radius, point[1] = theta
         point = POLAR_TO_CARTESIAN(point)
-        console.log("new cartestian", point)
-        x_arr.push(point[0]), y_arr.push(point[1]), z_arr.push(point[2])
+        x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
-    return [x_arr, y_arr, z_arr]
+    return [x, y, z]
 }
 
 // -------------------------------------------------
