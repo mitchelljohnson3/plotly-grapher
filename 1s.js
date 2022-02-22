@@ -25,7 +25,7 @@ function graph() {
 function ORB_1S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = RANDOM_POINT()
+        var point = randomPoint()
         var radius = R10()
         point[0] *= radius, point[1] *= radius, point[2] *= radius
         x.push(point[0]), y.push(point[1]), z.push(point[2])
@@ -36,7 +36,7 @@ function ORB_1S() {
 function ORB_2S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = RANDOM_POINT()
+        var point = randomPoint()
         var radius = R20()
         point[0] *= radius, point[1] *= radius, point[2] *= radius
         x.push(point[0]), y.push(point[1]), z.push(point[2])
@@ -47,11 +47,11 @@ function ORB_2S() {
 function ORB_2Pz() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = RANDOM_POINT()
-        point = CARTESIAN_TO_POLAR(point)
+        var point = randomPoint()
+        point = CartesianToPolar(point)
         var radius = R21(), theta = Y11()
         point[0] = radius, point[1] = theta
-        point = POLAR_TO_CARTESIAN(point)
+        point = PolarToCartesian(point)
         x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
     return [x, y, z]
@@ -127,10 +127,9 @@ function DegToRad(rad) {
 function RadToDeg(deg) {
     return deg * (180 / Math.PI)
 }
-
 // returns random 3d point in sphere (cartesian coordinates)
 // functions perfectly, picks points all with a radius of 1 from 0,0
-function RANDOM_POINT() {
+function randomPoint() {
     // calculate random latitude and longitude
     var u1 = Math.random(), u2 = Math.random() // calculate two random numbers
     var lat = (Math.acos((2.0 * u1) - 1.0) - (Math.PI / 2.0)) // calculate random latitude
@@ -141,18 +140,16 @@ function RANDOM_POINT() {
     var z = Math.sin(lat)
     return [x, y, z]
 }
-
 // functioning perfectly
-function POLAR_TO_CARTESIAN(point) {
+function PolarToCartesian(point) {
     var radius = point[0], theta = DegToRad(point[1]), phi = DegToRad(point[2])
     var X = radius * Math.sin(phi) * Math.cos(theta)
     var Y = radius * Math.sin(phi) * Math.sin(theta)
     var Z = radius * Math.cos(phi)
     return [round(X, 2), round(Y, 2), round(Z, 2)]
 }
-
 // functioning perfectly
-function CARTESIAN_TO_POLAR(point) {
+function CartesianToPolar(point) {
     var X = point[0], Y = point[1], Z = point[2]
     var radius = Math.sqrt(X * X + Y * Y + Z * Z)
     var theta = RadToDeg(Math.atan2(Y, X))
