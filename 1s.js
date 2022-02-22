@@ -58,7 +58,9 @@ function RANDOM_POINT() {
 }
 
 function POLAR_TO_CARTESIAN(point) {
-    var radius = point[0], theta = point[1], phi = point[2]
+    var radius = point[0]
+    var theta = point[1] / (180 / Math.PI)
+    var phi = point[2] / (180 / Math.PI)
     var X = radius * Math.sin(phi) * Math.cos(theta)
     var Y = radius * Math.sin(phi) * Math.sin(theta)
     var Z = radius * Math.cos(phi)
