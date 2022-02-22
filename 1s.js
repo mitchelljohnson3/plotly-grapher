@@ -42,11 +42,18 @@ function R10() {
 function randomRange(min, max) {
     return Math.random() * (max - min) + min;
 }
-
 // returns decimal rounded to d decimal places
 function round(num, d) {
     var r = Math.pow(10, d)
     return Math.round((num + Number.EPSILON) * r) / r
+}
+// returns rad radians converted to degrees
+function DegToRad(rad) {
+    return rad / (180 / Math.PI)
+}
+// returns deg degrees converted to radians
+function RadToDeg(deg) {
+    return deg * (180 / Math.PI)
 }
 
 // returns random 3d point in sphere (cartesian coordinates)
@@ -65,9 +72,7 @@ function RANDOM_POINT() {
 
 // functioning perfectly
 function POLAR_TO_CARTESIAN(point) {
-    var radius = point[0]
-    var theta = point[1] / (180 / Math.PI)
-    var phi = point[2] / (180 / Math.PI)
+    var radius = point[0], theta = DegToRad(point[1]), phi = DegToRad(point[2])
     var X = radius * Math.sin(phi) * Math.cos(theta)
     var Y = radius * Math.sin(phi) * Math.sin(theta)
     var Z = radius * Math.cos(phi)
@@ -78,8 +83,8 @@ function POLAR_TO_CARTESIAN(point) {
 function CARTESIAN_TO_POLAR(point) {
     var X = point[0], Y = point[1], Z = point[2]
     var radius = Math.sqrt(X * X + Y * Y + Z * Z)
-    var theta = Math.atan2(Y, X) * 180 / Math.PI
-    var phi = Math.acos(Z / radius) * 180 / Math.PI
+    var theta = RadToDeg(Math.atan2(Y, X))
+    var phi = RadToDeg(Math.acos(Z / radius))
     return [round(radius, 2), round(theta, 2), round(phi, 2)]
 }
 
