@@ -124,7 +124,7 @@ function R21() {
 
 // samples the Y10 (n = 2 l = 1 m = 0)
 function Y10() {
-    var domain = Math.PI, range = 0.866
+    var domain = Math.PI, range = 0.489
     while (true) {
         var theta = randomRange(0.0, domain), u = randomRange(0.0, range)
         var y11 = Math.sqrt((3 / (4 * Math.PI))) * Math.sin(theta)
