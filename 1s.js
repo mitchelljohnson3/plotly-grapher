@@ -9,7 +9,7 @@ $(document).ready(function () {
 // phi range [0 - 360] degrees OR [0 - 2PI] radians
 
 function graph() {
-    var points = ORB_2Pz()
+    var points = ORB_2Px()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
@@ -43,14 +43,44 @@ function ORB_2S() {
     }
     return [x, y, z]
 }
-// returns the 2pz (n=2 l=1 m=-+1) graph points
+// returns the 2px (n=2 l=1 m=0) graph points
+function ORB_2Px() {
+    var x = [], y = [], z = []
+    for (let i = 0; i < GRAPH_RESOLUTION; i++) {
+        var point = randomPoint(true)
+        var point2 = randomPoint(true)
+        point[0] = R21(), point[1] = Y10()
+        point2[0] = R21(), point2[1] = -Y10()
+        point = PolarToCartesian(point)
+        point2 = PolarToCartesian(point2)
+        x.push(point[0]), y.push(point[1]), z.push(point[2])
+        x.push(point2[0]), y.push(point2[1]), z.push(point2[2])
+    }
+    return [x, y, z]
+}
+// returns the 2py (n=2 l=1 m=-1) graph points
+function ORB_2Py() {
+    var x = [], y = [], z = []
+    for (let i = 0; i < GRAPH_RESOLUTION; i++) {
+        var point = randomPoint(true)
+        var point2 = randomPoint(true)
+        point[0] = R21(), point[1] = Y10()
+        point2[0] = R21(), point2[1] = -Y10()
+        point = PolarToCartesian(point)
+        point2 = PolarToCartesian(point2)
+        x.push(point[0]), y.push(point[1]), z.push(point[2])
+        x.push(point2[0]), y.push(point2[1]), z.push(point2[2])
+    }
+    return [x, y, z]
+}
+// returns the 2pz (n=2 l=1 m=1) graph points
 function ORB_2Pz() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = randomPoint(true)
         var point2 = randomPoint(true)
-        point[0] = R21(), point[1] = Y11()
-        point2[0] = R21(), point2[1] = -Y11()
+        point[0] = R21(), point[1] = Y10()
+        point2[0] = R21(), point2[1] = -Y10()
         point = PolarToCartesian(point)
         point2 = PolarToCartesian(point2)
         x.push(point[0]), y.push(point[1]), z.push(point[2])
@@ -94,11 +124,6 @@ function R21() {
 
 // samples the Y10 (n = 2 l = 1 m = 0)
 function Y10() {
-    var DOMAIN = Math.PI, RANGE = 1.225
-    return 0
-}
-// samples the Y11 (n = 2 l = 1 m = 1)
-function Y11() {
     var domain = Math.PI, range = 0.866
     while (true) {
         var theta = randomRange(0.0, domain), u = randomRange(0.0, range)
@@ -109,6 +134,12 @@ function Y11() {
         }
     }
 }
+// samples the Y11 (n = 2 l = 1 m = 1)
+// sign = true -> Y11 || sign = false -> Y1-1
+function Y11(sign) {
+    return 0
+}
+
 // BELOW ARE HELPER FUNCTIONS
 // -------------------------------------------------
 // returns random float value within the range of min - max
