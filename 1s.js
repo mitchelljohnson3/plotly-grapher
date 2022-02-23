@@ -36,9 +36,9 @@ function ORB_1S() {
 function ORB_2S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = randomPoint()
-        var radius = R20()
-        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        var point = randomPoint(true)
+        point[0] = R20()
+        point = PolarToCartesian(point)
         x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
     return [x, y, z]
