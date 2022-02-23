@@ -9,7 +9,7 @@ $(document).ready(function () {
 // phi range [0 - 360] degrees OR [0 - 2PI] radians
 
 function graph() {
-    var points = ORB_2S()
+    var points = ORB_1S()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
