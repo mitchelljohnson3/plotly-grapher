@@ -1,4 +1,5 @@
-// returns the 1s graph points
+// -------------------------------- 2P ORBITAL ---------------------------------
+// 1S (n=1 l=0 m=0)
 function ORB_1S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
@@ -9,7 +10,9 @@ function ORB_1S() {
     }
     return [x, y, z]
 }
-// returns the 2s (n=2 l=0 m=0) graph points
+// -----------------------------------------------------------------------------
+// -------------------------------- 2S ORBITAL ---------------------------------
+// 2S (n=2 l=0 m=0)
 function ORB_2S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
@@ -20,3 +23,4 @@ function ORB_2S() {
     }
     return [x, y, z]
 }
+// -----------------------------------------------------------------------------
