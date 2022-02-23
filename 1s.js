@@ -45,7 +45,7 @@ function ORB_2S() {
 }
 // returns the 2pz (n=2 l=1 m=-+1) graph points
 function ORB_2Pz() {
-    var x = [], y = [], z = [
+    var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = randomPoint(true)
         var radius = R21(), theta = Y11()
