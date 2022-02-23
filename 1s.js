@@ -102,7 +102,7 @@ function Y11() {
     var domain = Math.PI, range = 0.866
     while (true) {
         var theta = randomRange(0.0, domain), u = randomRange(0.0, range)
-        var y11 = Math.sqrt((3 / 4)) * Math.sin(theta)
+        var y11 = Math.sqrt((3 / (4 * Math.PI))) * Math.sin(theta)
         if (u < y11) {
             var degrees = RadToDeg(theta)
             return round(degrees, 1)
