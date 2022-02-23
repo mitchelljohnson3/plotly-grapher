@@ -1,4 +1,4 @@
-const GRAPH_RESOLUTION = 10000;
+const GRAPH_RESOLUTION = 5000;
 $(document).ready(function () {
     $("#chart").append(graph())
 })
@@ -9,7 +9,7 @@ $(document).ready(function () {
 // phi range [0 - 360] degrees OR [0 - 2PI] radians
 
 function graph() {
-    var points = ORB_2S()
+    var points = ORB_2Pz()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
@@ -25,9 +25,9 @@ function graph() {
 function ORB_1S() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
-        var point = randomPoint()
-        var radius = R10()
-        point[0] *= radius, point[1] *= radius, point[2] *= radius
+        var point = randomPoint(true)
+        point[0] = R10()
+        point = PolarToCartesian(point)
         x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
     return [x, y, z]
@@ -48,9 +48,13 @@ function ORB_2Pz() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = randomPoint(true)
+        var point2 = point
         point[0] = R21(), point[1] = Y11()
+        point2[0] = R21(), point2[1] = -Y11()
         point = PolarToCartesian(point)
+        point2 = PolarToCartesian(point2)
         x.push(point[0]), y.push(point[1]), z.push(point[2])
+        x.push(point2[0]), y.push(point2[1]), z.push(point2[2])
     }
     return [x, y, z]
 }
