@@ -1,5 +1,5 @@
-
-// returns the 2px (n=2 l=1 m=0) graph points
+// 2P ORBITALS
+// 2Px (n=2 l=1 m=0)
 function ORB_2Px() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
@@ -14,7 +14,7 @@ function ORB_2Px() {
     }
     return [x, y, z]
 }
-// returns the 2py (n=2 l=1 m=-1) graph points
+// 2Py (n=2 l=1 m=-1)
 function ORB_2Py() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
@@ -29,7 +29,7 @@ function ORB_2Py() {
     }
     return [x, y, z]
 }
-// returns the 2pz (n=2 l=1 m=1) graph points
+// 2Pz (n=2 l=1 m=1)
 function ORB_2Pz() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
