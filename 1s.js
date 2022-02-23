@@ -48,7 +48,7 @@ function ORB_2Pz() {
     var x = [], y = [], z = []
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var point = randomPoint(true)
-        var point2 = point
+        var point2 = randomPoint(true)
         point[0] = R21(), point[1] = Y11()
         point2[0] = R21(), point2[1] = -Y11()
         point = PolarToCartesian(point)
