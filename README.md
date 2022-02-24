@@ -26,6 +26,7 @@ phi -> angle from positive **X** axis towards positive **y** axis
 **4Px** -> (n = 4 l = 1 m = 0)
 **4Pz** -> (n = 4 l = 1 m = 1)
 #### D Orbitals
+UNSURE OF THESE VALUES
 **3Dxz** -> (n = 3 l = 2 m = -2)
 **3Dxy** -> (n = 3 l = 2 m = -1)
 **3Dyz** -> (n = 3 l = 2 m = 0)

@@ -6,7 +6,7 @@ $(document).ready(function () {
 // returns the plotly 3d plot
 function graph() {
     // which function are we getting the points from?
-    var points = ORB_2S()
+    var points = ORB_2Px()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
