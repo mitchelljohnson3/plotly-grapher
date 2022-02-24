@@ -1,4 +1,4 @@
-const GRAPH_RESOLUTION = 5000;
+const GRAPH_RESOLUTION = 10000;
 $(document).ready(function () {
     $("#chart").append(graph())
 })
@@ -23,9 +23,9 @@ function test() {
     for (let i = 0; i < GRAPH_RESOLUTION; i++) {
         var theta = randomRange(0.0, Math.PI)
         var phi = randomRange(0.0, 2 * Math.PI)
-        theta = RadToDeg(theta)
         phi = RadToDeg(phi)
         var r = solve(theta)
+        theta = RadToDeg(theta)
         var point = PolarToCartesian([r, theta, phi])
         x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
