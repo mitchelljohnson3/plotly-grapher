@@ -6,7 +6,7 @@ $(document).ready(function () {
 // returns the plotly 3d plot
 function graph() {
     // which function are we getting the points from?
-    var points = ORB_2Px()
+    var points = test()
     var data = [{
         x: points[0], y: points[1], z: points[2],
         mode: 'markers', type: 'scatter3d',
@@ -16,4 +16,23 @@ function graph() {
         }
     }];
     return Plotly.newPlot('chart', data, { height: 1000, width: 2000 });
+}
+
+function test() {
+    var x = [], y = [], z = []
+    for (let i = 0; i < GRAPH_RESOLUTION; i++) {
+        var theta = randomRange(0.0, Math.PI)
+        var phi = randomRange(0.0, 2 * Math.PI)
+        theta = RadToDeg(theta)
+        phi = RadToDeg(phi)
+        var r = solve(theta)
+        var point = PolarToCartesian([r, theta, phi])
+        x.push(point[0]), y.push(point[1]), z.push(point[2])
+    }
+    return [x, y, z]
+}
+
+function solve(theta) {
+    var val = Math.sqrt(3 / (4 * Math.PI)) * Math.cos(theta)
+    return Math.pow(val, 2)
 }
