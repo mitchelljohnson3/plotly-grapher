@@ -25,7 +25,7 @@ function test() {
         var phi = randomRange(0.0, 2 * Math.PI)
         phi = RadToDeg(phi)
         var r = solve(theta)
-        theta = RadToDeg(theta)
+        theta = RadToDeg(theta
         var point = PolarToCartesian([r, theta, phi])
         x.push(point[0]), y.push(point[1]), z.push(point[2])
     }
