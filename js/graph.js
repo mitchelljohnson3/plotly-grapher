@@ -55,5 +55,6 @@ function solve2(theta, phi) {
 }
 
 function solve3(theta, phi) {
-
+    var comp = math.complex(-1)
+    var val = Math.sqrt(3 / (8 * Math.PI)) * Math.sin(theta)
 }
