@@ -37,7 +37,7 @@ function PolarToCartesian(point) {
     var X = radius * Math.sin(phi) * Math.cos(theta)
     var Y = radius * Math.sin(phi) * Math.sin(theta)
     var Z = radius * Math.cos(phi)
-    return [round(X, 2), round(Y, 2), round(Z, 2)]
+    return [X, Y, Z]
 }
 // functioning perfectly
 function CartesianToPolar(point) {
