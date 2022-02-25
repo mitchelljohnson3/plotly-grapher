@@ -2,7 +2,8 @@ const GRAPH_RESOLUTION = 30000;
 $(document).ready(function () {
     $("#chart").append(graph())
 })
-
+var comp = math.complex(-1)
+console.log(comp)
 // returns the plotly 3d plot
 function graph() {
     // which function are we getting the points from?
