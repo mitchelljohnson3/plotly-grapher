@@ -49,3 +49,11 @@ function solve(theta) {
     var val = Math.sqrt(3 / (4 * Math.PI)) * Math.cos(theta)
     return Math.pow(val, 2)
 }
+
+function solve2(theta, phi) {
+
+}
+
+function solve3(theta, phi) {
+
+}
