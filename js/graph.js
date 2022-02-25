@@ -15,7 +15,22 @@ function graph() {
             size: 2
         }
     }];
-    return Plotly.newPlot('chart', data, { height: 1000, width: 2000 });
+    var layout = {
+        height: 1300,
+        width: 2000,
+        xaxis: {
+            title: "X AXIS",
+            color: 'rgb(0, 0, 0)',
+            showgrid: false
+        },
+        yaxis: {
+            color: 'rgb(0, 0, 0)'
+        },
+        zaxis: {
+            color: 'rgb(0, 0, 0)'
+        }
+    }
+    return Plotly.newPlot('chart', data, layout);
 }
 
 function test() {
