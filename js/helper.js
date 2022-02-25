@@ -45,5 +45,5 @@ function CartesianToPolar(point) {
     var radius = Math.sqrt(X * X + Y * Y + Z * Z)
     var theta = RadToDeg(Math.atan2(Y, X))
     var phi = RadToDeg(Math.acos(Z / radius))
-    return [round(radius, 2), round(theta, 2), round(phi, 2)]
+    return [radius, theta, phi]
 }
