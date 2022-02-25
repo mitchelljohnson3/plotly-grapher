@@ -1,4 +1,4 @@
-const GRAPH_RESOLUTION = 10000;
+const GRAPH_RESOLUTION = 30000;
 $(document).ready(function () {
     $("#chart").append(graph())
 })
@@ -16,12 +16,10 @@ function graph() {
         }
     }];
     var layout = {
-        height: 1300,
+        height: 1000,
         width: 2000,
         xaxis: {
-            title: "X AXIS",
-            color: 'rgb(0, 0, 0)',
-            showgrid: false
+            color: 'rgb(0, 0, 0)'
         },
         yaxis: {
             color: 'rgb(0, 0, 0)'
